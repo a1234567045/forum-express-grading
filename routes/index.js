@@ -27,8 +27,8 @@ module.exports = (app, passport) => {
   //如果使用者訪問...，就導向...的頁面 or 在...底下則交給...來處理
   app.get('/', authenticated, (req, res) => res.redirect('/restaurants'))
   app.get('/restaurants', authenticated, restController.getRestaurants)
-  
-  
+
+
   app.get('/admin', authenticatedAdmin, (req, res) => res.redirect('/admin/restaurants'))
   app.get('/admin/restaurants', authenticatedAdmin, adminController.getRestaurants)
 
@@ -52,6 +52,7 @@ module.exports = (app, passport) => {
   app.get('/admin/users', authenticatedAdmin, adminController.getUsers)
   app.put('/admin/users/:id/toggleAdmin', authenticatedAdmin, adminController.toggleAdmin)
 
+  app.get('/restaurants/:id', authenticated, restController.getRestaurant)
 
   app.get('/signup', userController.signUpPage)
   app.post('/signup', userController.signUp)
