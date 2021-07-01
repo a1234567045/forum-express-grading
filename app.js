@@ -33,7 +33,10 @@ app.use((req, res, next) => {
   next()
 })
 
-
+app.use((req, res, next) => {
+  req.user = helpers.getUser(req)
+  next()
+})
 
 
 app.listen(port, () => {
