@@ -10,5 +10,8 @@ module.exports = {
   },
   moment: function (a) {
     return moment(a).fromNow()
+  },
+  count: function (array) {
+    return array.length
   }
 }
