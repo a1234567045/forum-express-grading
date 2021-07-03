@@ -7,6 +7,7 @@ const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 const Comment = db.Comment
 const Restaurant = db.Restaurant
 const Favorite = db.Favorite
+const Like = db.Like
 
 const userController = {
   signUpPage: (req, res) => {
@@ -138,7 +139,7 @@ const userController = {
       })
   },
 
-  
+
   removeFavorite: (req, res) => {
     return Favorite.findOne({
       where: {
@@ -152,7 +153,31 @@ const userController = {
             return res.redirect('back')
           })
       })
-  }
+  },
+
+  addLike: (req, res) => {
+    return Like.create({
+      UserId: req.user.id,
+      RestaurantId: req.params.restaurantId
+    })
+      .then((restaurant) => {
+        return res.redirect('back')
+      })
+  },
+
+  removeLike: (req, res) => {
+    return Like.findOne({
+      where: {
+        UserId: req.user.id,
+        RestaurantId: req.params.restaurantId
+      }
+    }).then(like => {
+      return like.destroy().then(like => {
+        return res.redirect('back')
+      })
+    })
+  },
+
 }
 
 module.exports = userController
