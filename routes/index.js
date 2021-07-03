@@ -61,6 +61,7 @@ module.exports = (app, passport) => {
   app.put('/users/:id', authenticated, upload.single('image'), userController.putUser)
 
   app.get('/restaurants/feeds', authenticated, restController.getFeeds)
+  app.get('/restaurants/top', authenticated, restController.getTopRestaurant)
   app.get('/restaurants/:id', authenticated, restController.getRestaurant)
   app.get('/restaurants/:id/dashboard', authenticated, restController.getDashboard)
   app.post('/comments', authenticated, commentController.postComment)
